@@ -1,20 +1,20 @@
-package br.com.aviva;
+package br.com.aviva.listener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
 import br.com.aviva.model.TabelaUsuarioOnline;
+import br.com.aviva.repository.UsuarioOnlineRepository;
 
 @Component
 public class WebSocketEventListener {
 
-	@Autowired
-	private SimpMessageSendingOperations messagingTemplate;
-
+//	@Autowired
+//	private UsuarioOnlineRepository usuarioOnlineRepository;
+	
 	@EventListener
 	public void handleWebSocketConnectListener(SessionConnectedEvent event) {
 		System.out
@@ -23,7 +23,10 @@ public class WebSocketEventListener {
 
 	@EventListener
 	public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
-		// Vai remover da tabela de usuarios conectados
+		//TODO: REMOVER mock
 		TabelaUsuarioOnline.getInstance().removerUsuarioPorIdSocket(event.getSessionId());
+		
+		// Vai remover da tabela de usuarios conectados
+//		usuarioOnlineRepository.removerUsuarioPorIdWebSocket(event.getSessionId());
 	}
 }

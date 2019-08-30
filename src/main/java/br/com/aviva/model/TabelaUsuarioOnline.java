@@ -23,7 +23,7 @@ public class TabelaUsuarioOnline {
 	public void setUsuarioConectados(Map<String, String> usuarioConectados) {
 		this.usuarioConectados = usuarioConectados;
 	}
-	
+
 	public void removerUsuarioPorIdSocket(final String idWebSocket) {
 		this.usuarioConectados.entrySet().removeIf(entry -> idWebSocket.equals(entry.getValue()));
 		System.out.println("desconectado");
